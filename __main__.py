@@ -1,17 +1,8 @@
-import os
-
-from rich import print
-from rich.prompt import Prompt
-
-
-from config import get_file_split_config, print_split_config_table
-from pdf import apply_split_config
-
-import controller
-
-PARTITIONS_PATH = "parts"
+from cli import cli
 
 if __name__ == "__main__":
+
+    cli()
 
     # controller.split_pdfs_in_directory(PARTITIONS_PATH, "dest")
 
@@ -52,14 +43,6 @@ if __name__ == "__main__":
     #         "prefix": "Paris Montmartre - "
     #     },
     # }
-
-    config = {
-        # "ranges": [(1, 1), (2, 2), (3, 3)],
-        "ranges": [(1, 1), (2, 3), (2, 2), (3, 3)],
-        "split_vertical": True,
-        "pages_count": 2,
-        "prefix": "Paris Montmartre - "
-    }
 
     # for file, config in split_configs.items():
 
