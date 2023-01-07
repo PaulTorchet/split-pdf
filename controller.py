@@ -22,7 +22,7 @@ def split_pdfs_in_directory(source: str, destination: str):
     for file, config in split_configs.items():
         print_split_config_table(config, file)
 
-    if not Confirm.ask("Apply ?", default=True):
+    if not Confirm.ask(f"Create these files in '{destination}' ?", default=True):
         return
 
     for file, config in split_configs.items():
@@ -38,7 +38,7 @@ def split_pdf_file(file: str, destination: str):
 
     print_split_config_table(file_split_config, file)
 
-    if not Confirm.ask("Apply ?", default=True):
+    if not Confirm.ask(f"Create these files in '{destination}' ?", default=True):
         return
 
     apply_split_config(file, file_split_config, destination)
