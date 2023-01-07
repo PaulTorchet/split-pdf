@@ -1,9 +1,9 @@
 [tool.pdm]
 
 [project]
-name = ""
-version = ""
-description = ""
+name = "split-pdf"
+version = "0.0.1"
+description = "Split PDF files by pages or vertically."
 authors = [
     {name = "Paul TORCHET", email = "ptorchet.dev@gmail.com"},
 ]
