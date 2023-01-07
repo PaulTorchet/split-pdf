@@ -1,3 +1,6 @@
+import os
+
+
 def split_array_by_interval(array: list, interval: int):
     splitted_array = []
 
@@ -19,4 +22,4 @@ def split_array_by_ranges(array: list, ranges: list):
 
 
 def get_filename(file_path: str) -> str:
-    return file_path.split("/")[-1].split(".")[0]
+    return file_path.split(os.path.sep)[-1].split(".")[0]
