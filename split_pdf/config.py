@@ -7,7 +7,7 @@ from rich.prompt import Confirm, Prompt, IntPrompt
 
 from PyPDF2 import PdfReader
 
-from util import get_filename, split_array_by_interval, split_array_by_ranges
+from split_pdf.util import get_filename, split_array_by_interval, split_array_by_ranges
 
 
 def _get_file_size_in_mb(file_path: str, digits: int = 2) -> float:

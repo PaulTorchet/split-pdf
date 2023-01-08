@@ -2,8 +2,8 @@ import os
 
 from rich.prompt import Confirm
 
-from config import get_file_split_config, print_split_config_table
-from pdf import apply_split_config
+from split_pdf.config import get_file_split_config, print_split_config_table
+from split_pdf.pdf import apply_split_config
 
 
 def split_pdfs_in_directory(source: str, destination: str):
@@ -22,7 +22,7 @@ def split_pdfs_in_directory(source: str, destination: str):
     for file, config in split_configs.items():
         print_split_config_table(config, file)
 
-    if not Confirm.ask(f"Create these files in '{destination}' ?", default=True):
+    if not Confirm.ask(f"Create these files in '{os.path.abspath(destination)}' ?", default=True):
         return
 
     for file, config in split_configs.items():
@@ -38,7 +38,7 @@ def split_pdf_file(file: str, destination: str):
 
     print_split_config_table(file_split_config, file)
 
-    if not Confirm.ask(f"Create these files in '{destination}' ?", default=True):
+    if not Confirm.ask(f"Create these files in '{os.path.abspath(destination)}' ?", default=True):
         return
 
     apply_split_config(file, file_split_config, destination)

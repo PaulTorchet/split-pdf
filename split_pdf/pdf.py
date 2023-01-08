@@ -3,7 +3,7 @@ from copy import copy
 
 from PyPDF2 import PdfReader, PdfWriter, PageObject
 
-from util import get_filename, split_array_by_interval, split_array_by_ranges
+from split_pdf.util import get_filename, split_array_by_interval, split_array_by_ranges
 
 ANGLES = {
     270: {"left": ("bottom", "top"), "right": ("top", "top")},

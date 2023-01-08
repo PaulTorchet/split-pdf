@@ -3,7 +3,7 @@ import os
 import click
 from click_aliases import ClickAliasedGroup
 
-from controller import split_pdfs_in_directory, split_pdf_file
+from split_pdf.controller import split_pdfs_in_directory, split_pdf_file
 
 # for specific file
 # with options
