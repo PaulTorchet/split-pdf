@@ -11,11 +11,28 @@ from split_pdf.util import get_filename, split_array_by_interval, split_array_by
 
 
 def _get_file_size_in_mb(file_path: str, digits: int = 2) -> float:
+    """Returns file size in mb.
+
+    Args:
+        file_path (str): File path.
+        digits (int, optional): Digits to round size. Defaults to 2.
+
+    Returns:
+        float: File size.
+    """
     file_size = os.stat(file_path).st_size / (1024 * 1024)
     return round(file_size, digits)
 
 
-def _format_split_ranges(ranges: str):
+def _format_split_ranges(ranges: str) -> list[tuple]:
+    """Parse range string into list of tuples.
+
+    Args:
+        ranges (str): Ranges string.
+
+    Returns:
+        list[tuple]: List of ranges as tuples.
+    """
     formatted_ranges = []
 
     for curr_range in ranges.split(" "):
@@ -27,7 +44,15 @@ def _format_split_ranges(ranges: str):
     return formatted_ranges
 
 
-def _get_fake_split_result(split_config: dict):
+def _get_fake_split_result(split_config: dict) -> list[list]:
+    """Apply split configuration to a list of a fake list of pages.
+
+    Args:
+        split_config (dict): Split configuration to apply to the fake list.
+
+    Returns:
+        list[list]: List of splitted fakes pages.
+    """
     pages = ["Page " + str(page_index)
              for page_index in range(1, split_config["pages_count"] + 1)]
 
@@ -55,8 +80,13 @@ def _get_fake_split_result(split_config: dict):
     return splitted_pages
 
 
-def print_split_config_table(split_config: dict, file: str = None):
+def print_split_config_table(split_config: dict, file: str):
+    """Display a preview of files created when applying split config.
 
+    Args:
+        split_config (dict): Split configuration.
+        file (str): File path.
+    """
     filename = get_filename(file)
 
     table = Table(title=filename)
@@ -72,8 +102,16 @@ def print_split_config_table(split_config: dict, file: str = None):
     cprint(table)
 
 
-def get_file_split_config(file: str, bypass_main_confirm: bool = False):
+def get_file_split_config(file: str, bypass_main_confirm: bool = False) -> dict:
+    """Prompt questions to generate split configuration for a specified file.
 
+    Args:
+        file (str): File path.
+        bypass_main_confirm (bool, optional): By pass the first question useless for a single file. Defaults to False.
+
+    Returns:
+        dict: Split configuration.
+    """
     split_config = {}
 
     pdf = PdfReader(file)

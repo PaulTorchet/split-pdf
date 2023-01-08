@@ -7,6 +7,12 @@ from split_pdf.pdf import apply_split_config
 
 
 def split_pdfs_in_directory(source: str, destination: str):
+    """Asks and apply split configuration for each PDF in a directory.
+
+    Args:
+        source (str): Directory where PDFs are.
+        destination (str): Directory where to create sub folders with splitted PDFs.
+    """
     files = [file for file in os.listdir(
         source) if file.lower().endswith('.pdf')]
 
@@ -31,6 +37,12 @@ def split_pdfs_in_directory(source: str, destination: str):
 
 
 def split_pdf_file(file: str, destination: str):
+    """Asks and apply split configuration for a given PDF file.
+
+    Args:
+        file (str): File path
+        destination (str): Directory where to create sub folder with splitted PDFs.
+    """
     file_split_config = get_file_split_config(file, bypass_main_confirm=True)
 
     if not file_split_config:
