@@ -28,8 +28,6 @@ def _format_split_ranges(ranges: str):
 
 
 def _get_fake_split_result(split_config: dict):
-    print(split_config)
-
     pages = ["Page " + str(page_index)
              for page_index in range(1, split_config["pages_count"] + 1)]
 
