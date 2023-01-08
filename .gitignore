@@ -7,3 +7,5 @@ parts
 output
 
 .vscode
+
+split_pdf.egg-info
