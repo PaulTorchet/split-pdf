@@ -49,3 +49,42 @@ def get_filename(file_path: str) -> str:
         str: File name.
     """
     return file_path.split(os.path.sep)[-1].split(".")[0]
+
+
+def reorganize_array(array: list, order: list) -> str:
+    """Reorganize an array with a list of indexes.
+
+    Args:
+        array (list): Array to reorganize
+        order (list): List of indexes.
+
+    Returns:
+        str: Reorganized array.
+    """
+    organized_array = []
+
+    for index in order:
+        organized_array.append(array[index])
+
+    return organized_array
+
+
+def apply_reorganize_conf(arrays: list, reorganize_conf: dict) -> list[list]:
+    """Apply reorganize conf to a list of arrays/chunks.
+
+    Args:
+        arrays (list): Arrays/Chunks to reorganize.
+        reorganize_conf (dict): Configuration to apply.
+
+    Returns:
+        list[list]: List of reorganized arrays/chunks.
+    """
+    arrays_copy = arrays.copy()
+
+    for index, chunk in enumerate(arrays_copy):
+
+        if index in reorganize_conf:
+            arrays_copy[index] = reorganize_array(
+                chunk, reorganize_conf[index])
+
+    return arrays_copy

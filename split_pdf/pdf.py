@@ -3,7 +3,7 @@ from copy import copy
 
 from PyPDF2 import PdfReader, PdfWriter, PageObject
 
-from split_pdf.util import get_filename, split_array_by_interval, split_array_by_ranges
+from split_pdf.util import get_filename, split_array_by_interval, split_array_by_ranges, apply_reorganize_conf
 
 ANGLES = {
     0: {"left": ("right", "right"), "right": ("left", "right")},
@@ -141,6 +141,9 @@ def apply_split_config(file: str, config: dict, destination: str = ""):
 
     if config["split_vertical"]:
         pdf_chunks = split_chunks_vertically(pdf_chunks)
+
+    if config["reorganize"]:
+        pdf_chunks = apply_reorganize_conf(pdf_chunks, config["reorganize"])
 
     write_pdf_chunks(pdf_chunks, os.path.join(
         destination, filename), config["prefix"])

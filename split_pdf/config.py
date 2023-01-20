@@ -7,7 +7,7 @@ from rich.prompt import Confirm, Prompt, IntPrompt
 
 from PyPDF2 import PdfReader
 
-from split_pdf.util import get_filename, split_array_by_interval, split_array_by_ranges
+from split_pdf.util import get_filename, split_array_by_interval, split_array_by_ranges, apply_reorganize_conf
 
 
 def _get_file_size_in_mb(file_path: str, digits: int = 2) -> float:
@@ -77,7 +77,37 @@ def _get_fake_split_result(split_config: dict) -> list[list]:
 
         splitted_pages = vertically_splitted_pages
 
+    if split_config["reorganize"]:
+        splitted_pages = apply_reorganize_conf(
+            splitted_pages, split_config["reorganize"])
+
     return splitted_pages
+
+
+def _get_reorganize_config(split_config: dict) -> dict:
+    """Prompt questions to generate reorganize configuration for each pdf chunk.
+
+    Args:
+        split_config (dict): Split configuration to generate the chunks.
+
+    Returns:
+        dict: Reorganize configuration.
+    """
+    reorganize_conf = {}
+
+    fake_chunks = _get_fake_split_result({**split_config, "reorganize": {}})
+
+    for index, chunk in enumerate(fake_chunks):
+        pages_str = ", ".join(
+            [f"{i+1}:{page}" for i, page in enumerate(chunk)])
+        cprint(f"\nChunk {index + 1} : {pages_str}")
+        result = Prompt.ask('Enter pages order (ex: "1 2 3 4 ...)"')
+
+        if result:
+            reorganize_conf[index] = [int(res_index) -
+                                      1 for res_index in result.split(" ") if 1 <= int(res_index) <= len(chunk)]
+
+    return reorganize_conf
 
 
 def print_split_config_table(split_config: dict, file: str):
@@ -133,11 +163,16 @@ def get_file_split_config(file: str, bypass_main_confirm: bool = False) -> dict:
                                  default=1, show_default=True)
         split_config["interval"] = interval
     else:
-        ranges = Prompt.ask('Enter ranges (ex: "1-3 4 5-5 ...)" ')
+        ranges = Prompt.ask('Enter ranges (ex: "1-3 4 5-5 ...") ')
         split_config["ranges"] = _format_split_ranges(ranges)
 
     split_config["split_vertical"] = Confirm.ask(
         "Split pages vertically ?", default=False)
+
+    if Confirm.ask("Reorganize pages ?", default=False):
+        split_config["reorganize"] = _get_reorganize_config(split_config)
+    else:
+        split_config["reorganize"] = {}
 
     split_config["prefix"] = Prompt.ask(
         "Filename prefix ", default=f"{filename} - ")
