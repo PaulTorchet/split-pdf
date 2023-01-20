@@ -6,8 +6,10 @@ from PyPDF2 import PdfReader, PdfWriter, PageObject
 from split_pdf.util import get_filename, split_array_by_interval, split_array_by_ranges
 
 ANGLES = {
+    0: {"left": ("right", "right"), "right": ("left", "right")},
+    90: {"left": ("top", "top"), "right": ("bottom", "top")},
+    180: {"left": ("left", "right"), "right": ("right", "right")},
     270: {"left": ("bottom", "top"), "right": ("top", "top")},
-    0: {"left": ("right", "right"), "right": ("left", "right")}
 }
 
 
