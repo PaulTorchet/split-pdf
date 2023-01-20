@@ -25,7 +25,9 @@ For each file, you will be asked:
    - If yes, the interval (`int`)
    - Else, the range (Ex : `1-2 3-4`, `1 2 3-4 5-5`, `2 3-5 1-4 3`, ...)
 3. Split the pages vertically ? (50/50 ratio, when 2 pages are on the same PDF page)
-4. The prefix for created files
+4. Reorganize the pages of the splitted pdfs ?
+   - If yes, show pages with indexes for each splitted pdf
+5. The prefix for created files
 
 ## Commands
 
