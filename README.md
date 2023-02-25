@@ -1,4 +1,4 @@
-# Split-PDF CLI
+# Split-PDF CLI 1.0.0
 
 This CLI allows to separate PDF files, by pages, or vertically in the pages.
 
@@ -10,6 +10,14 @@ You can split pages by :
 This tool is mainly used for sheet music, but can also be used for all types of PDF.
 
 > This is a first version, many bugs can occure...
+
+## Installation
+
+```
+python -m pip install git+https://github.com/PaulTorchet/split-pdf.git
+
+python -m split_pdf
+```
 
 ## Features
 
