@@ -12,6 +12,7 @@ from split_pdf.controller import split_pdfs_in_directory, split_pdf_file
 
 
 @click.group(cls=ClickAliasedGroup)
+@click.version_option(prog_name="split-pdf")
 def cli():
     """Split PDF file(s) by pages and/or vertically."""
     pass
