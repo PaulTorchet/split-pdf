@@ -16,7 +16,7 @@ This tool is mainly used for sheet music, but can also be used for all types of 
 ```
 python -m pip install git+https://github.com/PaulTorchet/split-pdf.git
 
-python -m split_pdf
+split-pdf
 ```
 
 ## Features
